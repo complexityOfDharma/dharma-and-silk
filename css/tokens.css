@@ -1,0 +1,24 @@
+/* Color tokens: DESIGN.md section 9.2. Change colors here, nowhere else. */
+:root {
+  /* sky bands, top → horizon */
+  --sky-night: #24234a; --sky-dusk: #37325f; --sky-mauve: #5a3d6e; --sky-plum: #8a4f78;
+  --sky-rose: #b8607a;  --sky-coral: #e08c74; --sky-glow: #f09c70;  --sky-haze: #f6c28b;
+  /* land & scene */
+  --dune-far: #e08a6c; --dune-mid: #a8566a; --dune-near: #6b3659;
+  --cliff: #bf7a52; --cliff-ledge: #dc9a6c; --cliff-strata: #a7643f; --cave: #4a2a38;
+  --ground: #e5ae7c; --ground-dot: #d49a6a; --wall: #cf956a; --roof: #6b3346;
+  --poplar: #f0b53f; --poplar-shade: #d98d2b; --trunk: #6b4234;
+  --sun: #ffe2ad; --camel: #5b3346;
+  /* interface */
+  --panel: #2b1a36; --panel-2: #3b2747; --panel-line: #5a3d6e; --shadow: #120e1f;
+  --cream: #fff4e6; --paper: #f6ecdf; --card: #fffaf3; --paper-line: #e3cfb8;
+  --apricot: #f2b35e; --terracotta: #c8643b; --eyebrow: #f6c89a;
+  /* text & status */
+  --muted: #cdb5c4; --muted-lt: #6d5a66;
+  --good: #7fd8bf; --good-lt: #2f6f69; --fair: #ffe08a; --poor: #f5a3a3; --cost-lt: #a8455a;
+  --water: #7fc8e0; --flame: #ff8a3d;
+
+  /* type */
+  --font-pixel: "Press Start 2P", monospace;
+  --font-body: "VT323", monospace;
+}

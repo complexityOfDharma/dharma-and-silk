@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dharma &amp; Silk</title>
+  <meta name="description" content="Dharma & Silk: Buddhism along the Silk Road. A journey from Kucha to Chang'an in 400 CE.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 10' shape-rendering='crispEdges'%3E%3Cpath fill='%23ff8a3d' d='M3 0h2v2h-2z M2 2h4v2h-4z M1 4h6v3h-6z M2 7h4v1h-4z'/%3E%3Cpath fill='%23f2b35e' d='M3 4h2v3h-2z M0 9h8v1h-8z M1 8h6v1h-6z'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="viewport">
+    <main id="stage" aria-label="Dharma and Silk">
+      <div id="screen"></div>
+      <div id="toast-root" aria-live="polite"></div>
+      <div id="modal-root"></div>
+    </main>
+  </div>
+
+  <div id="rotate" role="alert">
+    <div class="rotate-box">
+      <div class="rotate-phone" aria-hidden="true"></div>
+      <p class="rotate-title">TURN YOUR DEVICE SIDEWAYS</p>
+      <p class="rotate-sub">Dharma &amp; Silk plays in landscape.</p>
+    </div>
+  </div>
+
+  <noscript><p class="noscript">Dharma &amp; Silk needs JavaScript turned on.</p></noscript>
+
+  <!-- Game data (plain scripts that set globals, so the game opens from disk) -->
+  <script src="data/balance.js"></script>
+  <script src="data/roles.js"></script>
+  <script src="data/landmarks.js"></script>
+  <!-- Game code -->
+  <script src="js/sprites.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>

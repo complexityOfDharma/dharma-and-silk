@@ -9,6 +9,10 @@
   window.LANDMARKS = [
     {
       id: "kucha", name: "Kucha", alt: "", kmFromPrev: 0,
+      terrain: "desert", talk: null,
+      visitTitle: "The monasteries of Kucha",
+      visitText: "Kucha was one of the great Buddhist kingdoms of the Silk Road. Its monks followed the teachings of the Sarvastivada school, and its monasteries were famous as far away as China.",
+      visitHistory: "Near Kucha, at Kizil, monks and artists cut hundreds of cave temples into a cliff and painted them with scenes from the Buddha's lives. Many paintings survive today, though some were cut out and taken to museums in Europe about a hundred years ago.",
       blurb: "A Buddhist kingdom of monasteries and painted caves.",
       visit: "Monastery", bazaar: true, monastery: true,
       scene: [
@@ -27,6 +31,10 @@
     },
     {
       id: "karashahr", name: "Karashahr", alt: "Agni", kmFromPrev: 300,
+      terrain: "desert", talk: "talk_karashahr",
+      visitTitle: "Agni by the lake",
+      visitText: "Agni (Karashahr) sat beside Bosten Lake, the largest lake in the region. Reeds grew along its shores, and the kingdom had its own Buddhist monasteries.",
+      visitHistory: "In 400 CE the Chinese monk Faxian stayed in Agni for more than two months on his way west. He wrote that the monks there followed strict rules, and that the people were not very welcoming to travelers from China.",
       blurb: "An oasis kingdom beside a great lake. Travelers pay a toll here.",
       visit: "Lakeshore", bazaar: false, monastery: true,
       scene: [
@@ -45,6 +53,10 @@
     },
     {
       id: "turfan", name: "Turfan", alt: "Gaochang", kmFromPrev: 300,
+      terrain: "desert", talk: "talk_turfan",
+      visitTitle: "Gaochang",
+      visitText: "Gaochang, near Turfan, was a walled town in a hot, low basin below the red Flaming Mountains. Farmers watered their fields and vineyards with snowmelt from the mountains.",
+      visitHistory: "Many of Gaochang's people were Chinese settlers living alongside local peoples, and Buddhism thrived there. Archaeologists have found Buddhist texts at Turfan written in more than a dozen languages.",
       blurb: "A walled city below the red Flaming Mountains. Hot in summer.",
       visit: "Monastery", bazaar: true, monastery: true,
       scene: [
@@ -64,6 +76,10 @@
     },
     {
       id: "hami", name: "Hami", alt: "Yiwu", kmFromPrev: 400,
+      terrain: "desert", talk: "talk_hami",
+      visitTitle: "The last oasis",
+      visitText: "Hami (Yiwu) was a small oasis with good springs and green fields. East of it lay a stony desert with very few wells, the hardest stretch of the road to Dunhuang.",
+      visitHistory: "Travelers crossing this desert watched for old camel tracks and the piles of stones earlier caravans left to mark the way. Carrying enough water was a matter of life and death.",
       blurb: "The last oasis before the hardest stretch of desert.",
       visit: "Well", bazaar: true, monastery: false,
       scene: [
@@ -82,6 +98,10 @@
     },
     {
       id: "dunhuang", name: "Dunhuang", alt: "", kmFromPrev: 400,
+      terrain: "hardDesert", talk: "talk_dunhuang",
+      visitTitle: "The Mogao Caves",
+      visitText: "Near Dunhuang, monks began cutting cave temples into the cliff at Mogao in the 300s. Families, merchants and officials paid for new caves, painted from floor to ceiling.",
+      visitHistory: "Over the next thousand years, people carved more than 700 caves. In one small cave, sealed around the year 1000, tens of thousands of scrolls survived until 1900: Buddhist sutras, letters, contracts and even a printed Diamond Sutra from 868.",
       blurb: "Cave temples cut into the cliff above the Mingsha dunes.",
       visit: "Caves", bazaar: true, monastery: true,
       scene: [
@@ -105,6 +125,10 @@
     },
     {
       id: "jiuquan", name: "Jiuquan", alt: "", kmFromPrev: 400,
+      terrain: "corridor", talk: "talk_jiuquan",
+      visitTitle: "Beacon towers",
+      visitText: "Watchtowers of rammed earth lined the road through the Hexi Corridor. Soldiers sent signals from tower to tower: smoke by day and fire by night.",
+      visitHistory: "Travelers needed written permits to pass the border posts here. Wooden slips found near these towers record the names of travelers, their animals and where they were going.",
       blurb: "A border town. Beacon towers watch the road; you need a permit.",
       visit: "Beacons", bazaar: false, monastery: true,
       scene: [
@@ -121,6 +145,10 @@
     },
     {
       id: "zhangye", name: "Zhangye", alt: "", kmFromPrev: 200,
+      terrain: "corridor", talk: "talk_zhangye",
+      visitTitle: "The camps of rival kingdoms",
+      visitText: "Around 400 CE, several small kingdoms fought over the Hexi Corridor. Zhangye was the capital of one of them, the Northern Liang.",
+      visitHistory: "In the summer of 400, Faxian's party spent the monks' rainy-season retreat at Zhangye. The road ahead was blocked by fighting, and the ruler of Zhangye supported the monks while they waited.",
       blurb: "In the Hexi Corridor, where rival kingdoms camp their armies.",
       visit: "Camps", bazaar: true, monastery: false,
       scene: [
@@ -140,6 +168,10 @@
     },
     {
       id: "guzang", name: "Guzang", alt: "Wuwei", kmFromPrev: 250,
+      terrain: "corridor", talk: "talk_guzang",
+      visitTitle: "Guzang, the city of Liangzhou",
+      visitText: "Guzang (Wuwei) was the capital of the Later Liang kingdom. The monk Kumarajiva lived here for about seventeen years, kept by its rulers.",
+      visitHistory: "During his long years in Guzang, Kumarajiva learned to speak and write Chinese well. That made him one of the greatest translators in history once he reached Chang'an.",
       blurb: "Capital of Liangzhou, where the monk Kumarajiva has been held for years.",
       visit: "City", bazaar: true, monastery: true,
       scene: [
@@ -158,6 +190,10 @@
     },
     {
       id: "lanzhou", name: "Lanzhou", alt: "", kmFromPrev: 250,
+      terrain: "loess", talk: "talk_lanzhou",
+      visitTitle: "The Yellow River crossing",
+      visitText: "Lanzhou (then called Jincheng) guarded a crossing of the Yellow River between steep hills of yellow loess soil.",
+      visitHistory: "Travelers crossed by ferry boat. In the coldest part of winter the river could freeze hard enough for carts and camels to walk across.",
       blurb: "The Yellow River crossing, between steep loess hills.",
       visit: "Ferry", bazaar: false, monastery: false,
       scene: [
@@ -177,6 +213,10 @@
     },
     {
       id: "changan", name: "Chang'an", alt: "", kmFromPrev: 600,
+      terrain: "loess", talk: null,
+      visitTitle: "The translation hall",
+      visitText: "Emperor Yao Xing of the Later Qin gave Kumarajiva a place to work in Chang'an, the Xiaoyao Garden. Hundreds of monks came to help.",
+      visitHistory: "Kumarajiva's team translated about 35 texts, including the Lotus Sutra, the Diamond Sutra and the Amida Sutra. Kumarajiva would read a text aloud in Chinese, the monks discussed each line, and scribes wrote down the version they agreed on.",
       blurb: "The capital. Emperor Yao Xing welcomes monks here.",
       visit: "Translation hall", bazaar: true, monastery: true,
       scene: [

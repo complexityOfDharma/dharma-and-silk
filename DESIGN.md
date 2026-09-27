@@ -269,13 +269,13 @@ Use `--apricot` for the one primary action on dark screens and `--terracotta` fo
 index.html
 css/tokens.css     color tokens from 9.2
 css/style.css      components and screens
-js/state.js        game state, save/load
-js/engine.js       travel loop, events, resources
-js/dialogue.js     dialogue modal, typewriter, choices, role gating
-js/ui.js           screens
-js/sprites.js      pixel sprites and scene builders (appendix)
-data/landmarks.js  includes each landmark's scene composition
-data/events.js
+js/state.js        game state, save/load, save codes
+js/engine.js       travel loop, events, resources, score (no DOM)
+js/dialogue.js     dialogue modal, typewriter, choices, role gating, event cards
+js/ui.js           screens and HUD
+js/sprites.js      pixel sprites, portraits and scene builders (appendix)
+data/landmarks.js  includes each landmark's scene composition and history cards
+data/events.js     random events, fixed story events, other caravans' toasts
 data/dialogues.js
 data/roles.js
 data/balance.js    all tuning numbers in one place
@@ -358,3 +358,43 @@ mid  #a8566a: M0 800V616H32V608H80V600H144V592H288V600H368V608H416V616H464V624H5
 near #6b3659: M0 800V688H16V680H64V672H112V664H176V656H496V664H560V672H608V680H656V688H704V696H800V704H928V696H1008V688H1056V680H1088V672H1136V664H1184V656H1264V664H1280V800Z
 front #2b1a36: M0 800V744H16V736H112V728H208V720H336V712H592V720H704V728H784V736H896V744H1168V736H1248V728H1280V800Z
 ```
+
+## 12. Rules settled during the first build (September 2026)
+
+The first full build had to decide things this doc left open. They are recorded here so the doc stays the source of truth; change them here first.
+
+**Time and route**
+- Seasons follow the Chinese solar calendar: spring from about Feb 4, summer May 5, autumn Aug 7, winter Nov 7. Paces are 12 / 16 / 20 km a day, so most caravans reach Dunhuang in late summer or autumn 400.
+- Winter at Dunhuang is mandatory in 400: war closes the road east, so the calendar skips to spring 401 whenever you leave. Monks stay free, others pay 2 silk each, and the monks send you off with 15 days of food.
+- Guzang: if you arrive before autumn 401, the siege skips the calendar to the surrender (autumn 401). Then you follow the army east (invented), which halves random events until Chang'an.
+- Yellow River: pay the ferry, cross on the ice (winter only, risky), or wait for the river to freeze.
+- Chang'an: if you arrive before 402, a short scene has Kumarajiva arrive in the first weeks of 402. Then comes the delivery scene, then the end screen.
+
+**Supplies**
+- Food is counted in days for the whole caravan (Filling 0.8, Meager 0.6, Bare bones 0.4 per day for five people).
+- Water: you own a number of skins (capacity) and some are full. Wells on the road refill some skins; every landmark refills them all for free. Hot summer desert travel doubles water use, and night travel cuts it by about half.
+- Camel load: each camel carries 12 (15 with the camel driver), each person carries 4, and the cook's pots take up 4. Overloading slows the caravan and can make a camel collapse.
+- Markets are at Kucha, Turfan, Hami, Dunhuang, Zhangye, Guzang and Chang'an. The bazaar advice tells you how far the next market is.
+
+**People**
+- Health is a hidden 0–100 score shown as words. A companion in very poor health usually leaves to rest at a monastery; one who reaches zero dies.
+- The player never dies. At very low health you collapse and the caravan rests until you can walk.
+- If food runs out for three days, a passing caravan shares food, at most once between two landmarks.
+
+**Roles in detail**
+- Monk companion: the whole caravan lodges free at monasteries (except the winter at Dunhuang, where only monks are free), and morale losses are halved.
+- Young monk (player): lodges free, and gets extra alms food at monasteries.
+- Guide: better chance of finding wells, and stops dry-well and lost-trail events. The guide's home is Agni, the second landmark, so the choice to pay them (10 silk) comes early.
+- Sogdian merchant: at each market town, spends a day trading (+1 day, +3 silk).
+- Healer: cures illness (in 3 days with medicine, or with herbs if there is none).
+
+**Landmark actions**
+- Visit: at a monastery, stay 2 nights. You pay lodging, rest, get alms food, and teach once (Lamp +1). The scribe copies one sutra there (uses 2 paper). Everywhere else, look around. Either way you get a history card.
+- Rest: 1, 3 or 5 days. The scribe mends the scrolls while you rest.
+- Talk: a local at each landmark, and the story meetings (Faxian at Dunhuang, marked "!", then Li Gao). Effects from a talk only apply the first time.
+- Save / Menu buttons sit on the landmark card. Autosave happens after the arrival story.
+
+**Other**
+- Settings: text speed (normal, fast, instant) and travel speed (slow, normal, fast), stored per browser.
+- Lamp score = sutras × condition × 10 + 10 per companion who arrived + 5 per act of generosity.
+- The 32×32 NPC portraits come from one builder (face, hat, beard, robe and background options), following the Faxian pattern.

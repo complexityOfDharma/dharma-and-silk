@@ -562,6 +562,211 @@
 
   /* ---------- Portraits and small sprites for the UI ---------- */
 
+  /* ---------- Portrait builder: same 32×32 grid and framing as Faxian (appendix) ---------- */
+  const FACE = {
+    skin: "M12 5h8v1h-8z M11 6h10v1h-10z M10 7h12v10h-12z M11 17h10v1h-10z M12 18h8v1h-8z M9 11h1v3h-1z M22 11h1v3h-1z M14 19h4v2h-4z",
+    highlight: "M13 5h4v1h-4z M12 6h4v1h-4z",
+    shade: "M21 8h1v9h-1z M20 17h1v1h-1z M19 18h1v1h-1z M15 14h2v1h-2z M14 19h4v1h-4z M12 14h1v2h-1z M19 14h1v2h-1z",
+    wrinkle: "M13 8h6v1h-6z",
+    brows: "M11 10h3v1h-3z M18 10h3v1h-3z",
+    eyesClosed: "M12 12h2v1h-2z M18 12h2v1h-2z",
+    eyesOpen: "M12 11h2v2h-2z M18 11h2v2h-2z",
+    eyeShine: "M12 11h1v1h-1z M18 11h1v1h-1z",
+    mouth: "M14 16h4v1h-4z",
+    smile: "M13 15h1v1h-1z M14 16h4v1h-4z M18 15h1v1h-1z",
+    beard: "M10 14h1v3h-1z M21 14h1v3h-1z M11 16h3v2h-3z M18 16h3v2h-3z M12 18h8v2h-8z M13 20h6v1h-6z",
+    mustache: "M13 15h6v1h-6z",
+    robe: "M8 21h16v1h-16z M5 22h20v10h-20z",
+    under: "M13 21h6v1h-6z M14 22h4v2h-4z M15 24h2v1h-2z",
+    drape: "M6 22h3v1h-3z M7 23h3v1h-3z M9 24h3v1h-3z M10 25h3v1h-3z M12 26h3v1h-3z M13 27h3v1h-3z M15 28h3v1h-3z M16 29h3v1h-3z M18 30h3v1h-3z M19 31h3v1h-3z",
+    seams: "M22 23h1v9h-1z M9 28h1v4h-1z M5 29h4v1h-4z",
+    collar: "M12 21h8v1h-8z M13 22h6v1h-6z M14 23h4v1h-4z",
+    staff: "M27 5h1v27h-1z",
+    staffRings: "M26 1h3v1h-3z M25 2h1v3h-1z M29 2h1v3h-1z M26 5h3v1h-3z",
+    spear: "M27 3h1v29h-1z",
+    spearTip: "M26 0h3v1h-3z M27 1h1v2h-1z"
+  };
+  const HATS = {
+    shaved: { hat: "M12 5h8v1h-8z M11 6h10v1h-10z" },
+    guan: { hat: "M11 4h10v1h-10z M10 5h12v3h-12z M9 7h1v4h-1z M22 7h1v4h-1z M13 1h6v3h-6z", band: "M11 2h10v1h-10z" },
+    helmet: { hat: "M11 3h10v1h-10z M10 4h12v4h-12z M9 7h1v6h-1z M22 7h1v6h-1z", band: "M15 1h2v2h-2z" },
+    peaked: { hat: "M14 0h4v1h-4z M13 1h6v1h-6z M12 2h8v1h-8z M11 3h10v2h-10z M10 5h12v3h-12z", band: "M10 7h12v1h-12z" },
+    turban: { hat: "M11 2h10v1h-10z M10 3h12v1h-12z M9 4h14v4h-14z", band: "M9 6h14v1h-14z" },
+    straw: { hat: "M13 2h6v1h-6z M11 3h10v2h-10z M5 5h22v2h-22z", band: "M11 4h10v1h-10z" },
+    hair: { hat: "M11 4h10v1h-10z M10 5h12v3h-12z M9 6h1v6h-1z M22 6h1v6h-1z", band: "M10 7h12v1h-12z" }
+  };
+  function makePortrait(o) {
+    const bg = o.bg || ["#b8607a", "#e08c74", "#f6c28b", "#e7a476"];
+    const layers = [
+      [bg[0], "M0 0h32v10h-32z"], [bg[1], "M0 10h32v6h-32z"], [bg[2], "M0 16h32v8h-32z"],
+      [bg[3], "M0 24V20h6v-1h8v1h8v-2h10v14H0Z"]
+    ];
+    if (o.sun !== false) layers.push(["#ffe4a8", "M2 3h3v1h-3z M1 4h5v2h-5z M2 6h3v1h-3z"]);
+    if (o.prop === "staff") layers.push(["#6b4234", FACE.staff], ["#f2b35e", FACE.staffRings]);
+    if (o.prop === "spear") layers.push(["#6b4234", FACE.spear], ["#cdb5c4", FACE.spearTip]);
+    layers.push([o.skin, FACE.skin], [o.light, FACE.highlight], [o.shade, FACE.shade]);
+    if (o.old) layers.push([o.shade, FACE.wrinkle]);
+    const hat = HATS[o.hat || "shaved"];
+    layers.push([o.hatColor || o.shade, hat.hat]);
+    if (hat.band && o.bandColor) layers.push([o.bandColor, hat.band]);
+    layers.push([o.brows || "#2a1a14", FACE.brows]);
+    if (o.eyes === "closed") layers.push(["#2a1a14", FACE.eyesClosed]);
+    else layers.push(["#2a1a14", FACE.eyesOpen], ["#fff4e6", FACE.eyeShine]);
+    if (o.beard) layers.push([o.beard, FACE.beard]);
+    if (o.mustache) layers.push([o.mustache, FACE.mustache]);
+    layers.push(["#9a5a44", o.smile ? FACE.smile : FACE.mouth]);
+    layers.push([o.robe, FACE.robe], [o.under || "#6f6258", o.collar ? FACE.collar : FACE.under]);
+    if (o.drape) layers.push([o.drape, FACE.drape], [o.seams || "#8a3a28", FACE.seams]);
+    if (o.prop === "staff" || o.prop === "spear") layers.push([o.skin, "M25 24h3v2h-3z"]);
+    return layers;
+  }
+  Object.assign(PORTRAITS, {
+    elder: makePortrait({ skin: "#dba47a", light: "#efc49d", shade: "#b98561", old: true, brows: "#fff4e6", eyes: "closed",
+      robe: "#9a3f33", drape: "#c0573e", seams: "#6f2a22", prop: "staff" }),
+    ligao: makePortrait({ skin: "#e8b48a", light: "#f6d2ae", shade: "#c98d63", hat: "guan", hatColor: "#24234a", bandColor: "#f2b35e",
+      beard: "#2a1a14", mustache: "#2a1a14", robe: "#37325f", under: "#f6ecdf", collar: true,
+      bg: ["#5a3d6e", "#8a4f78", "#e08c74", "#bf7a52"] }),
+    kumarajiva: makePortrait({ skin: "#c98d63", light: "#dca27a", shade: "#a8704c", old: true, brows: "#2a1a14",
+      robe: "#7a2e2e", drape: "#c8643b", seams: "#5a1f1f", smile: true,
+      bg: ["#37325f", "#8a4f78", "#e08c74", "#cf956a"] }),
+    guard: makePortrait({ skin: "#e0a47a", light: "#f0c29c", shade: "#bd8258", hat: "turban", hatColor: "#f6ecdf", bandColor: "#c8643b",
+      mustache: "#4a2a38", robe: "#5a3d6e", under: "#cdb5c4", collar: true, prop: "spear",
+      bg: ["#5a3d6e", "#8a4f78", "#7fc8e0", "#a8566a"] }),
+    farmer: makePortrait({ skin: "#d99a6c", light: "#edb68a", shade: "#b57a50", hat: "hair", hatColor: "#2a1a14", bandColor: "#2f6f69",
+      robe: "#6d8a3a", under: "#f6ecdf", collar: true, smile: true,
+      bg: ["#c8643b", "#a7643f", "#f6c28b", "#bf7a52"] }),
+    wellkeeper: makePortrait({ skin: "#d39a70", light: "#e9b890", shade: "#ae7a52", old: true, hat: "turban", hatColor: "#cdb5c4", bandColor: "#6d5a66",
+      brows: "#fff4e6", beard: "#fff4e6", mustache: "#fff4e6", robe: "#a7643f", under: "#e3cfb8", collar: true }),
+    soldier: makePortrait({ skin: "#e3aa7e", light: "#f3c9a2", shade: "#c08a60", hat: "helmet", hatColor: "#6d5a66", bandColor: "#c8643b",
+      mustache: "#2a1a14", robe: "#6b3346", under: "#8a4f78", collar: true, prop: "spear",
+      bg: ["#37325f", "#5a3d6e", "#a8566a", "#6b3659"] }),
+    trader: makePortrait({ skin: "#e6ad84", light: "#f5caa5", shade: "#c48c62", hat: "peaked", hatColor: "#c8643b", bandColor: "#f2b35e",
+      beard: "#6b4234", mustache: "#6b4234", robe: "#2e6b85", under: "#f2b35e", collar: true, smile: true,
+      bg: ["#b8607a", "#f09c70", "#f6c28b", "#f0b53f"] }),
+    youngmonk: makePortrait({ skin: "#e8b48a", light: "#f6d2ae", shade: "#c98d63", smile: true,
+      robe: "#b5533a", drape: "#f2b35e", seams: "#8a3a28",
+      bg: ["#5a3d6e", "#b8607a", "#e08c74", "#cf956a"] }),
+    ferryman: makePortrait({ skin: "#c98d63", light: "#dca27a", shade: "#a8704c", hat: "straw", hatColor: "#dc9a6c", bandColor: "#a7643f",
+      mustache: "#2a1a14", robe: "#6f6258", under: "#e3cfb8", collar: true,
+      bg: ["#8a4f78", "#e08c74", "#b07a4a", "#dc9a6c"] })
+  });
+
+  /* ---------- Travel scene: scrolling layers and a walking caravan (section 9.5) ---------- */
+  // Waves must repeat every 1280px so each layer can scroll forever without a seam.
+  function loopRidge(base, waves) {
+    return (x) => waves.reduce((y, [amp, k, phase]) => y + amp * Math.sin((x / (1280 / k)) * Math.PI * 2 + (phase || 0)), base);
+  }
+  function loopStepped(fn, fill) {
+    let d = `M0 ${H}`;
+    for (let x = 0; x < 2560; x += 16) d += `V${snap(fn(x + 8), 8)}H${x + 16}`;
+    return path(d + `V${H}Z`, fill);
+  }
+  function loopDots(seed, y0, y1, n, fill, w) {
+    const r = rng(seed); let d = "";
+    for (let i = 0; i < n; i++) {
+      const x = snap(r() * 1272, 8), y = snap(y0 + r() * (y1 - y0), 8);
+      d += rectD(x, y, w || 8, 4) + rectD(x + 1280, y, w || 8, 4);
+    }
+    return path(d, fill);
+  }
+  function loopPeaks(base, height, spacing, seed, color, snow) {
+    const r = rng(seed), peaks = [];
+    for (let x = 0; x < 1280; x += spacing) peaks.push([x + r() * spacing * 0.5, base - height * (0.55 + r() * 0.45)]);
+    const fn = (x) => {
+      let y = base;
+      const xx = x % 1280;
+      for (const [px, py] of peaks) {
+        for (const off of [-1280, 0, 1280]) {
+          const dy = py + Math.abs(xx - (px + off)) * 1.1;
+          if (dy < y) y = dy;
+        }
+      }
+      return y;
+    };
+    let out = loopStepped(fn, color);
+    if (snow) {
+      const line = base - height * 0.62; let d = "";
+      for (let x = 0; x < 2560; x += 16) {
+        const y = snap(fn(x + 8), 8);
+        if (y < line) d += rectD(x, y, 16, Math.min(24, snap(line - y, 8) + 8));
+      }
+      out += path(d, T("cream"), 'opacity="0.9"');
+    }
+    return out;
+  }
+  function loopSprites(xs, draw) { return xs.map((x) => draw(x) + draw(x + 1280)).join(""); }
+
+  const CAMEL_LEGS = ["M3 10h1v4h-1z M5 10h1v4h-1z M12 10h1v4h-1z M14 10h1v4h-1z",
+    "M2 10h1v4h-1z M6 10h1v3h-1z M11 10h1v3h-1z M15 10h1v4h-1z"];
+  const CAMEL_NOLEGS = CAMEL.body.replace(" M3 10h1v4h-1z M5 10h1v4h-1z M12 10h1v4h-1z M14 10h1v4h-1z", "");
+  const PERSON_LEGS = ["M1 7h1v2h-1z M4 7h1v2h-1z", "M2 7h1v2h-1z M3 7h1v2h-1z"];
+
+  function walkingCamel(x, y) {
+    const u = 4;
+    return sprite(CAMEL_NOLEGS, x, y, u, T("camel")) + sprite(CAMEL.blanket, x, y, u, T("terracotta")) +
+      sprite(CAMEL.bags, x, y, u, T("apricot")) +
+      `<g class="walk-a">${sprite(CAMEL_LEGS[0], x, y, u, T("camel"))}</g>` +
+      `<g class="walk-b">${sprite(CAMEL_LEGS[1], x, y, u, T("camel"))}</g>`;
+  }
+  function walkingPerson(x, y, robe, staff) {
+    const u = 4;
+    return sprite(STANDER.skin, x, y, u, "#e8b48a") + sprite(STANDER.robe, x, y, u, robe) +
+      (staff ? sprite("M5 0h1v9h-1z", x, y, u, T("trunk")) : "") +
+      `<g class="walk-b">${sprite(PERSON_LEGS[0], x, y, u, T("trunk"))}</g>` +
+      `<g class="walk-a">${sprite(PERSON_LEGS[1], x, y, u, T("trunk"))}</g>`;
+  }
+  // people: [{ color, leader }], camels: number
+  function walkingCaravan(people, camels, groundY) {
+    let out = "", x = 860;
+    const lead = people[0];
+    out += walkingPerson(x, groundY - 36, lead.color, true);
+    x -= 40;
+    const rest = people.slice(1);
+    const nCamels = Math.min(4, camels);
+    for (let i = 0; i < Math.max(nCamels, rest.length); i++) {
+      if (i < nCamels) { x -= 84; out += walkingCamel(x, groundY - 56); }
+      if (rest[i]) { x -= 30; out += walkingPerson(x, groundY - 36, rest[i].color); }
+    }
+    return out;
+  }
+
+  const NIGHT_SKY = [["sky-night", 260], ["sky-dusk", 400], ["sky-mauve", 800]];
+  function travelScene(o) {
+    const terrain = o.terrain || "desert", night = !!o.night, winter = o.season === "winter";
+    let back = sky(night ? NIGHT_SKY : SKY_DUSK) + stars(night ? 44 : 9, night ? 70 : 30, night ? 360 : 190);
+    back += night ? FEATURES.moon({ x: 1060, y: 150, r: 28, bg: T("sky-night") }) : sun(1040, 330, 56);
+    let far = "", mid = "", near = "", ground = "", props = "";
+    const groundY = 560;
+    if (terrain === "desert" || terrain === "hardDesert") {
+      far = terrain === "desert"
+        ? loopStepped(loopRidge(420, [[26, 2, 0.4], [12, 5, 1.2]]), T("dune-far"))
+        : loopStepped(loopRidge(452, [[10, 2, 1], [6, 4, 0.2]]), T("dune-far"));
+      mid = loopStepped(loopRidge(476, [[20, 3, 1.8], [8, 8, 0.4]]), T("dune-mid"));
+      near = terrain === "desert" ? loopStepped(loopRidge(516, [[16, 2, 2.6], [6, 6, 0.9]]), T("dune-near")) : "";
+    } else if (terrain === "corridor") {
+      far = loopPeaks(470, 230, 160, 21, T("dune-mid"), true);
+      mid = loopStepped(loopRidge(488, [[12, 3, 0.5], [6, 7, 2]]), T("dune-far"));
+      props = loopSprites([300, 980], (x) => FEATURES.beacon({ base: 500, towers: [[x, 64]], color: "wall" }));
+    } else {
+      far = loopStepped(loopRidge(380, [[40, 2, 0.3], [16, 5, 2.2]]), T("cliff"));
+      mid = loopStepped(loopRidge(440, [[24, 3, 1.6], [10, 7, 0.8]]), T("cliff-strata"));
+      props = loopSprites([200, 760, 1100], (x) => FEATURES.poplars({ base: 520, trees: [[x, 96]] }));
+    }
+    ground = path(rectD(0, groundY - 40, 2560, H - groundY + 40), T(terrain === "hardDesert" ? "cliff-ledge" : "ground")) +
+      loopDots(3, groundY - 32, H, 90, T(winter ? "cream" : "ground-dot"), 8);
+    if (terrain === "hardDesert") ground += loopDots(8, groundY - 24, H, 40, T("cliff-strata"), 4) +
+      loopSprites([420, 1010], (x) => path(rectD(x, groundY - 48, 24, 8) + rectD(x + 4, groundY - 56, 16, 8) + rectD(x + 8, groundY - 64, 8, 8), T("cliff-strata")));
+    const shade = night ? path(rectD(0, 0, 2560, H), T("sky-night"), 'opacity="0.35"') : "";
+    return `<svg class="scene travel-scene" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges" aria-hidden="true">
+      ${back}
+      <g class="scroll scroll-far">${far}</g>
+      <g class="scroll scroll-mid">${mid}${props}</g>
+      <g class="scroll scroll-near">${near}</g>
+      <g class="scroll scroll-ground">${ground}${shade}</g>
+      <g class="caravan">${walkingCaravan(o.people || [{ color: T("terracotta") }], o.camels == null ? 3 : o.camels, groundY + 8)}</g>
+    </svg>`;
+  }
+
   function portrait(id, px) {
     const p = PORTRAITS[id]; if (!p) return "";
     const size = px || 288;
@@ -578,7 +783,7 @@
     W, H, T, rng, snap, rectD, path, sprite, icon, ICONS,
     sky, stars, sun, pixelCircle, stepped, ridge, groundAt,
     camel, camelResting, person, campfire, stupa,
-    FEATURES, buildScene, titleScene, nightCampScene, portrait, lampFlame,
+    FEATURES, buildScene, titleScene, nightCampScene, portrait, lampFlame, travelScene, makePortrait, PORTRAITS,
     CAMEL, CAMEL_REST, MONK_WALK, STUPA
   };
 })();
